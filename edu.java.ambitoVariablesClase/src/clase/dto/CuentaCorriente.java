@@ -28,51 +28,40 @@ public class CuentaCorriente {
 	}
 
 	public void inicio (String nombreTitular,String dniTitular,int numeroCuenta) {
-		CuentaCorriente datosInicio = new CuentaCorriente(dniTitular,nombreTitular);
 		Scanner leer = new Scanner(System.in);
 		do {
-			if(cuentas.get(numeroCuenta).dni!=datosInicio.dni||cuentas.get(numeroCuenta).nombreTitular!=datosInicio.nombreTitular) {
+			if(cuentas.get(numeroCuenta).dni!=dniTitular||cuentas.get(numeroCuenta).nombreTitular!=nombreTitular) {
 				System.out.println("Los datos Introducidos en la cuenta no coincide,vuelva a intrducir los datos:");
 				System.out.println("Nombre del Titular: ");
-				datosInicio.nombreTitular=leer.next();
+				nombreTitular=leer.next();
 				System.out.println("DNI: ");
-				datosInicio.dni=leer.next();System.out.println("Numero de cuenta: ");
+				dniTitular=leer.next();
+				System.out.println("Numero de cuenta: ");
 				numeroCuenta=leer.nextInt();
 			}
-		}while(cuentas.get(numeroCuenta).dni!=datosInicio.dni||cuentas.get(numeroCuenta).nombreTitular!=datosInicio.nombreTitular);
+		}while(cuentas.get(numeroCuenta).dni!=dniTitular||cuentas.get(numeroCuenta).nombreTitular!=nombreTitular);
 		leer.close();
 	}
 
 	public void ingresarDinero(double cantidadIngreso,String nombreTitular,String dniTitular,int numeroCuenta) {
-		CuentaCorriente datos = new CuentaCorriente(dniTitular,nombreTitular);
 		inicio(nombreTitular,dni,numeroCuenta);
-		datos=cuentas.get(numeroCuenta);
-		datos.saldoCuenta=datos.saldoCuenta+cantidadIngreso;
-		cuentas.set(numeroCuenta, datos);
-		
-		
+		cuentas.get(numeroCuenta).saldoCuenta=cuentas.get(numeroCuenta).saldoCuenta+cantidadIngreso;
 	}
 	public void monstarInformacion(String dni,String nombreTitular,String dniTitular,int numeroCuenta) {
 		inicio(nombreTitular,dni,numeroCuenta);
-		CuentaCorriente CuentaPropia = new CuentaCorriente(dniTitular,nombreTitular);
-		CuentaPropia=cuentas.get(numeroCuenta);
-		
-		System.out.println("Nombre: "+CuentaPropia.nombreTitular);
-		System.out.println("DNI: "+CuentaPropia.dni);
-		System.out.println("Saldo actual: "+CuentaPropia.saldoCuenta);
+		System.out.println("Nombre: "+cuentas.get(numeroCuenta).nombreTitular);
+		System.out.println("DNI: "+cuentas.get(numeroCuenta).dni);
+		System.out.println("Saldo actual: "+cuentas.get(numeroCuenta).saldoCuenta);
 	}
 	public double sacarDinero(double cantidadRetirada,String nombreTitular,String dniTitular,int numeroCuenta) {
-		CuentaCorriente datos = new CuentaCorriente(dniTitular,nombreTitular);
 		inicio(nombreTitular,dniTitular,numeroCuenta);
-		datos=cuentas.get(numeroCuenta);
-		if(datos.saldoCuenta-cantidadRetirada<0) {
+		if(cuentas.get(numeroCuenta).saldoCuenta-cantidadRetirada<0) {
 			System.out.println("Saldo insuficiente");
 			return 0;
 		}
 		else {
 			System.out.println("Operacion realizada");
-			datos.saldoCuenta=datos.saldoCuenta-cantidadRetirada;
-			cuentas.set(numeroCuenta, datos);
+			cuentas.get(numeroCuenta).saldoCuenta=cuentas.get(numeroCuenta).saldoCuenta-cantidadRetirada;
 			return cantidadRetirada;
 		}
 	}
