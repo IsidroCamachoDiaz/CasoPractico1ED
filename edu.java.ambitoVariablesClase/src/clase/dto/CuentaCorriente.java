@@ -1,5 +1,6 @@
 package clase.dto;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,10 +14,35 @@ public class CuentaCorriente {
 		this.nombreTitular = nombreTitular;
 	}
 
-	String dni;
-	String nombreTitular;
-	double saldoCuenta;
+	private String dni;
+	private String nombreTitular;
+	private double saldoCuenta;
 	public List <CuentaCorriente> cuentas= new LinkedList<>();
+	
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public String getNombreTitular() {
+		return nombreTitular;
+	}
+
+	public void setNombreTitular(String nombreTitular) {
+		this.nombreTitular = nombreTitular;
+	}
+
+	public double getSaldoCuenta() {
+		return saldoCuenta;
+	}
+
+	public void setSaldoCuenta(double saldoCuenta) {
+		this.saldoCuenta = saldoCuenta;
+	}
+
 
 	public double crearCuenta(String dniCuenta,String nombreTitular) {
 		double cero=0.0;
@@ -47,8 +73,8 @@ public class CuentaCorriente {
 		inicio(nombreTitular,dni,numeroCuenta);
 		cuentas.get(numeroCuenta).saldoCuenta=cuentas.get(numeroCuenta).saldoCuenta+cantidadIngreso;
 	}
-	public void monstarInformacion(String dni,String nombreTitular,String dniTitular,int numeroCuenta) {
-		inicio(nombreTitular,dni,numeroCuenta);
+	public void monstarInformacion(String nombreTitular,String dniTitular,int numeroCuenta) {
+		inicio(nombreTitular,dniTitular,numeroCuenta);
 		System.out.println("Nombre: "+cuentas.get(numeroCuenta).nombreTitular);
 		System.out.println("DNI: "+cuentas.get(numeroCuenta).dni);
 		System.out.println("Saldo actual: "+cuentas.get(numeroCuenta).saldoCuenta);
